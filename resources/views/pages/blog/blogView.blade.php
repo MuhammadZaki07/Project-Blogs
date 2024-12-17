@@ -17,6 +17,9 @@
     <div class="w-full py-24 px-32">
         <div class="w-full flex justify-between">
             <div class="px-20">
+                <div class="mb-10">
+                    <a href="/" class="bg-red-500 py-3 px-5 text-white rounded-lg w-32 text-center text-xl font-bold block"><i class="bi bi-arrow-left"></i> Back</a>
+                </div>
                 <div class="header">
                     <img src="{{ asset('storage/' . $blog->image) }}" alt="Image"
                         class="block rounded-lg overflow-hidden w-full max-h-96 object-cover">
