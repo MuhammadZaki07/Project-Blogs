@@ -6,6 +6,9 @@
                 <p class="text-sm text-slate-300 font-normal mt-3">Halaman ini untuk membuat blog, dimana data akan di tampilkan ke user untuk di baca</p>
             </div>
             <div class="bg-white w-full rounded-lg shadow-lg py-5 px-8">
+                 <div class="overflow-hidden rounded-lg w-full mb-8">
+                    <img id="imagePrev" src="https://asset.gecdesigns.com/img/wallpapers/beautiful-magical-misty-mountains-reflection-river-ultra-hd-wallpaper-4k-sr10012420-1706505766369-cover.webp" alt="imagePrev" class="w-full max-h-96 object-cover rounded-lg">
+                </div>
                 <form action="{{ route('proccess.create.blog') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-2 gap-4">

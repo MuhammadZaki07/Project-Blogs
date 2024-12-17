@@ -6,11 +6,17 @@
                 <p class="text-sm text-slate-300 font-normal mt-3">Halaman ini untuk mengedit blog</p>
             </div>
             <div class="bg-white w-full rounded-lg shadow-lg py-5 px-8">
+                <div class="overflow-hidden rounded-lg w-full mb-8">
+                    <img id="imagePrev"
+                         src="{{ $blogs->image ? asset('storage/' . $blogs->image) : 'https://asset.gecdesigns.com/img/wallpapers/beautiful-magical-misty-mountains-reflection-river-ultra-hd-wallpaper-4k-sr10012420-1706505766369-cover.webp' }}"
+                         alt="image preview"
+                         class="w-full max-h-96 object-cover rounded-lg">
+                </div>
                 <form action="{{ route('update.blog', $blogs->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-2 gap-4">
-
+                        <!-- Title Input -->
                         <div class="row">
                             <label for="title" class="font-bold text-gray-800 text-lg">Title</label>
                             <input type="text" name="title" id="title" placeholder="Title"
@@ -21,6 +27,7 @@
                             @enderror
                         </div>
 
+                        <!-- Slug Input -->
                         <div class="row">
                             <label for="slug" class="font-bold text-gray-800 text-lg">Slug</label>
                             <input type="text" name="slug" id="slug" placeholder="Slug"
@@ -31,6 +38,7 @@
                             @enderror
                         </div>
 
+                        <!-- Category Dropdown -->
                         <div class="row">
                             <label for="category_id" class="font-bold text-gray-800 text-lg">Category</label>
                             <select name="category_id" id="category_id"
@@ -45,7 +53,6 @@
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
-
                                 @endif
                             </select>
                             @error('category_id')
@@ -53,7 +60,7 @@
                             @enderror
                         </div>
 
-
+                        <!-- Image Input -->
                         <div class="row">
                             <label for="image" class="font-bold text-gray-800 text-lg">Image</label>
                             <input type="file" name="image" id="image"
@@ -63,17 +70,17 @@
                             @endif
                         </div>
 
+                        <!-- Content Editor -->
                         <x-forms.tinymce-editor :value="old('content', $blogs->content)" />
-
                     </div>
 
                     <div class="mt-6 text-right">
                         <button type="submit"
-                            class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600">Update
-                            Post</button>
+                            class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600">Update Post</button>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </x-app-layout>

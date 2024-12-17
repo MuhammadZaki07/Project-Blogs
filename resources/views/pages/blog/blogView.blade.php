@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -29,7 +30,7 @@
                         <div>
                             <div class="flex items-center space-x-3">
                                 <h1 class="font-semibold text-slate-400 text-sm">{{ $blog->user->username }}</h1>
-                                    <div class="bg-yellow-300 w-3 h-3 rounded-full animate-pulse" title="Admin"></div>
+                                <div class="bg-yellow-300 w-3 h-3 rounded-full animate-pulse" title="Admin"></div>
 
                             </div>
                             <p class="text-xs text-slate-400 font-normal">{{ $blog->created_at->format('d-m-Y') }}</p>
@@ -66,41 +67,56 @@
                     @if ($blog->comments->isEmpty())
                         <p class="text-gray-400 mt-5">Belum ada komentar.</p>
                     @else
-                        @foreach ($blog->comments as $comment)
-                            <div class="komentar w-full mt-8">
-                                <div class="flex space-x-5">
-                                    <img src="{{ asset('storage/' . $comment->user->image) ?? 'https://via.placeholder.com/40' }}"
-                                        alt="profile" class="rounded-full w-10 h-10">
-
-                                    <div>
-                                        <h1 class="font-bold text-white text-sm">{{ $comment->user->username }}</h1>
-                                        <p class="text-xs text-slate-400 font-normal">
-                                            {{ $blog->created_at->format('d-m-Y | H:i') }}</p>
-                                    </div>
+                    @foreach ($blog->comments as $comment)
+                    <div class="komentar w-full mt-8">
+                        <div class="flex space-x-5">
+                            <img src="{{ $comment->user->image ? asset('storage/' . $comment->user->image) : 'https://via.placeholder.com/40' }}"
+                                alt="profile" class="rounded-full w-10 h-10">
+                            <div>
+                                <div class="flex items-center space-x-3">
+                                    <h1 class="font-bold text-white text-sm">{{ $comment->user->username }}</h1>
+                                    @if (auth()->check() && auth()->id() === $comment->user_id)
+                                        <form action="{{ route('delete.comment', $comment->id) }}" method="POST"
+                                              id="delete-form-{{ $comment->id }}" class="inline" data-id="{{ $comment->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="text-red-500 hover:text-red-700 bg-transparent border-none p-0">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
-                                <div class="block mt-3">
-                                    <h1 class="font-semibold text-white">{{ $comment->isi }}</h1>
-                                </div>
+                                <p class="text-xs text-slate-400 font-normal">
+                                    {{ $comment->created_at->format('d-m-Y | H:i') }}
+                                </p>
                             </div>
-                        @endforeach
+                        </div>
+                        <div class="block mt-3">
+                            <h1 class="font-semibold text-white">{{ $comment->isi }}</h1>
+                        </div>
+                    </div>
+                @endforeach
+
                     @endif
                 </div>
             </div>
-            <div class="w-full ml-10 px-12">
+            <div class="w-full ml-10 px-10">
                 @foreach ($recentBlogs as $item)
-                <div class="mx-auto mt-12">
-                    <a href="{{ route('blogView', $item->slug) }}">
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="Image"
-                            class="w-full max-h-72 block rounded-lg" />
-                        <h1 class="font-extrabold mt-4 text-lg underline text-white">{{ $item->title }}</h1>
-                    </a>
-                </div>
+                    <div class="mx-auto mt-12">
+                        <a href="{{ route('blogView', $item->slug) }}">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="Image"
+                                class="w-full block rounded-lg object-cover" />
+                            <h1 class="font-extrabold mt-4 text-lg underline text-white">{{ $item->title }}</h1>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </div>
     </div>
     </div>
     <x-alerts.swicth-alerts-success />
+    <script src="{{ asset('dist/js/scriptValdatedDelete.js') }}"></script>
 </body>
 
 </html>

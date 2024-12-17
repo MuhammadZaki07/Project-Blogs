@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\Userscontroller;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -83,4 +84,5 @@ Route::middleware('auth')->group(function () {
     Route::get('blogs/{id}', [BlogsController::class, 'edit'])->name('edit.blog');
     Route::put('blogs/{id}', [BlogsController::class, 'update'])->name('update.blog');
     Route::delete('blogs/{id}', [BlogsController::class, 'delete'])->name('delete.blog');
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('delete.comment');
 });

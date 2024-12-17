@@ -122,7 +122,7 @@ class BlogsController extends Controller
     public function storeComment(Request $request, $id)
     {
         $request->validate([
-            'comment' => 'required|min:3|max:1000',
+            'comment' => 'required|max:1000',
         ]);
 
         Comment::create([

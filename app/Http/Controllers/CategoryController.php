@@ -69,9 +69,16 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = Category::findOrFail($id);
+        if ($category->posts()->exists()) {
+            return redirect()->route('table.category')
+                ->with('error', "Kategori tidak dapat dihapus karena sedang digunakan oleh blog.");
+        }
+
         $category->delete();
-        return redirect()->route('table.category')->with('success', "categoryy succesfully deleted!!");
+        return redirect()->route('table.category')
+            ->with('success', "Kategori berhasil dihapus!");
     }
+
 
     public function search(Request $request)
     {
