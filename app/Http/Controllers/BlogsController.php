@@ -95,17 +95,23 @@ class BlogsController extends Controller
     public function show($slug)
     {
         $blog = Post::with(['comments.user'])->where('slug', $slug)->firstOrFail();
-        $recentBlogs = Post::latest()->take(5)->get();
-        return view('pages.blog.blogView', compact('blog','recentBlogs'));
+        $recentBlogs = Post::latest()->where('slug', '<>', $slug)->take(5)->get();
+        return view('pages.blog.blogView', compact('blog', 'recentBlogs'));
     }
+
 
 
     public function showByUser(string $userId)
     {
-        $blogs = Post::where('user_id', $userId)->get();
-        $recentBlogs = Post::latest()->take(5)->get();
+        $blogs = Post::where('user_id', $userId)
+            ->withCount('comments')
+            ->get();
+
+        $recentBlogs = Post::latest()->take(3)->get();
+
         return view('pages.blog.index', compact('blogs', 'recentBlogs'));
     }
+
 
     public function search(Request $request)
     {

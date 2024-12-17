@@ -25,11 +25,11 @@
                     </div>
                     <div class="mt-6 mb-3 flex gap-14 md:!gap-14">
                         <div class="flex flex-col items-center justify-center">
-                            <p class="text-2xl font-bold text-black">{{ $totalPosts }}</p>
+                            <p class="text-2xl font-bold text-black">{{ $item->posts_count }}</p>
                             <p class="text-sm font-normal text-gray-600">Posts</p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <p class="text-2xl font-bold text-black">{{ $totalComments }}</p>
+                            <p class="text-2xl font-bold text-black">{{ $item->comments_count }}</p>
                             <p class="text-sm font-normal text-gray-600">Comments</p>
                         </div>
                     </div>

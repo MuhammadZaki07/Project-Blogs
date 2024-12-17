@@ -11,9 +11,14 @@ class Userscontroller extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('created_at','desc')->get();
+        $users = User::withCount(['posts', 'comments'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $totalPosts = Post::count();
         $totalComments = Comment::count();
+
         return view('pages.users.index', compact('users', 'totalPosts', 'totalComments'));
     }
+
 }
