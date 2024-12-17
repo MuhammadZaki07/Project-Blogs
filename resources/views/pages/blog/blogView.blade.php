@@ -91,7 +91,7 @@
                 <div class="mx-auto mt-12">
                     <a href="{{ route('blogView', $item->slug) }}">
                         <img src="{{ asset('storage/' . $item->image) }}" alt="Image"
-                            class="w-full block rounded-lg" />
+                            class="w-full max-h-72 block rounded-lg" />
                         <h1 class="font-extrabold mt-4 text-lg underline text-white">{{ $item->title }}</h1>
                     </a>
                 </div>

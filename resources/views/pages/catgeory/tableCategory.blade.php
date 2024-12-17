@@ -64,7 +64,7 @@
                 <label for="name" class="block text-lg font-bold mb-3 text-white">Name</label>
                 <input type="text" name="name" id="name"
                     class="block w-full p-2 border rounded-lg bg-gray-50 font-normal text-gray-900"
-                    placeholder="Enter category name" required>
+                    placeholder="Enter category name">
             </div>
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
@@ -82,7 +82,7 @@
                     <input type="hidden" name="id" id="edit-id" value="{{ $item->id }}">
                     <label for="edit-name" class="block text-lg font-bold mb-3 text-white">Name</label>
                     <input type="text" name="name" id="edit-name"
-                        class="block w-full p-2 border rounded-lg bg-gray-50 font-normal text-gray-900" value="{{ $item->name }}" required>
+                        class="block w-full p-2 border rounded-lg bg-gray-50 font-normal text-gray-900" value="{{ $item->name }}">
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">

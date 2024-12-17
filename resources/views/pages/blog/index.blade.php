@@ -59,8 +59,8 @@
                         @foreach ($recentBlogs as $item)
                             <a href="{{ route('blogView', $item->slug) }}" class="block mb-6">
                                 <img src="{{ asset('storage/' . $item->image) }}" alt="Image"
-                                    class="w-full h-52 object-cover rounded-lg mb-2 shadow-md">
-                                <h1 class="font-bold text-white text-lg mt-3">{{ $item->title }}</h1>
+                                    class="w-full max-h-72 object-cover rounded-lg mb-2 shadow-md">
+                                <h1 class="font-bold hover:underline text-white text-lg mt-3">{{ $item->title }}</h1>
                             </a>
                         @endforeach
                         @endif

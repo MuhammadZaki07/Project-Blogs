@@ -19,11 +19,10 @@ return new class extends Migration
             $table->text('content');
             $table->string('image',255)->nullable();
             $table->json('tags')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

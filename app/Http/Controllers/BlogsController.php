@@ -15,7 +15,7 @@ class BlogsController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $blogs = Post::where('user_id', $userId)->get();
+        $blogs = Post::where('user_id', $userId)->orderByDesc('id')->get();
         return view('pages.blog.tableBlogs', compact('blogs'));
     }
 

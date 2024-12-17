@@ -25,7 +25,7 @@ class CategoryController extends Controller
 
     public function tableCategory()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('created_at', 'desc')->get();
         return view('pages.catgeory.tableCategory', compact('categories'));
     }
 
